@@ -10,7 +10,7 @@ app.use(cors());
 // Frontend
 app.use(express.static("public"));
 
-app.get("/races", async (req, res) => {
+app.get("https://formula-e-cal.herokuapp.com/races", async (req, res) => {
   const races = await getRaces();
   res.json(races);
 });
