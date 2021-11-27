@@ -1,8 +1,11 @@
 const express = require("express");
+const cors = require("cors");
 const getRaces = require("./services/notion");
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+
+app.use(cors());
 
 // Frontend
 app.use(express.static("public"));
