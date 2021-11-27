@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
+
+body {
+  font-family: "Outfit", sans-serif;
+}
+
+.nav-container {
+  justify-content: center !important;
+}
+
+#racesAccordion {
+  max-width: 800px;
+}
