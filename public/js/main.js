@@ -4,8 +4,8 @@ let loading = false;
 
 const getRacesFromNotion = async () => {
   loading = true;
-  // const res = await fetch(`https://formula-e-cal.herokuapp.com/races`);
-  const res = await fetch(`http://localhost:5000/races`);
+  const res = await fetch(`https://formula-e-cal.herokuapp.com/races`);
+  // const res = await fetch(`http://localhost:5000/races`);
   const data = await res.json();
   loading = false;
   return data;
