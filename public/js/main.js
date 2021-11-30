@@ -1,15 +1,26 @@
 const racesElement = document.querySelector("#racesAccordion");
+const loadingElement = document.querySelector("#loading");
+let loading = false;
 
 const getRacesFromNotion = async () => {
-  const res = await fetch(`https://formula-e-cal.herokuapp.com/races`);
-  // const res = await fetch(`http://localhost:5000/races`);
+  loading = true;
+  // const res = await fetch(`https://formula-e-cal.herokuapp.com/races`);
+  const res = await fetch(`http://localhost:5000/races`);
   const data = await res.json();
+  loading = false;
   return data;
 };
 
 const addRacesToDOM = async () => {
   const races = await getRacesFromNotion();
-  console.log(races);
+
+  // Clear loading div & reset height once data fetched
+  if (!loading) {
+    loadingElement.innerHTML = "";
+    loadingElement.style.height = "0px";
+  }
+
+  // Map through each returned race and create accordion-item with info
 
   races.forEach((race) => {
     const newDiv = document.createElement("div");
@@ -37,11 +48,19 @@ const addRacesToDOM = async () => {
       }" class="accordion-collapse collapse" aria-labelledby="flush-heading${
       race.round
     }" data-bs-parent="#racesAccordion">
-        <div class="accordion-body">
+        <div class="accordion-body d-flex justify-content-between">
+          <div class="race-info">
+            <p><i class="fas fa-flag-checkered me-2"></i>Round ${race.round}</p>
+            <p><i class="fas fa-info-circle me-2"></i>${race.circuit}, ${
+      race.country
+    }</p>
         
-        <p>Round ${race.round}</p>
-        <p>${race.circuit}, ${race.country}</p>
-        
+          </div>
+          <div class="race-info race-external">
+          <a href="${
+            race.url
+          }" target="__blank"><i class="fas fa-external-link-alt more-info"></i></a>
+        </div>
         </div>
       </div>
     

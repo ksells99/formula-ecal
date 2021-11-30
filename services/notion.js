@@ -8,29 +8,32 @@ const notion = new Client({
 
 // Gets called from index.js
 module.exports = getRaces = async () => {
-  const payload = {
-    path: `databases/${process.env.NOTION_DATABASE_ID}/query`,
-    method: "POST",
-  };
+  const databaseId = process.env.NOTION_DATABASE_ID;
 
-  //   Get data from notion
-  const { results } = await notion.request(payload);
+  // Get race data from notion - sort by round asc
+  const { results } = await notion.databases.query({
+    database_id: databaseId,
+    sorts: [
+      {
+        property: "Round",
+        direction: "ascending",
+      },
+    ],
+  });
 
   //   Map through result and create race object for each calendar entry
   const races = results.map((page) => {
     return {
       id: page.id,
-      round: page.properties.Round.rich_text[0].text.content,
+      round: page.properties.Round.number,
       title: page.properties.Name.title[0].text.content,
       date: page.properties.Date.date.start,
       circuit: page.properties.Circuit.rich_text[0].text.content,
       country: page.properties.Country.rich_text[0].text.content,
       country_code: page.properties.Code.rich_text[0].text.content,
+      url: page.properties.Info.url,
     };
   });
 
-  // Notion returns latest calendar entry first - need to reverse to have races in round order
-  const racesInOrder = races.slice().reverse();
-
-  return racesInOrder;
+  return races;
 };

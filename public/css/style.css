@@ -3,12 +3,21 @@ body {
   font-family: "Outfit", sans-serif;
 }
 
+nav {
+  cursor: default;
+}
+
 .nav-container {
   justify-content: center !important;
 }
 
+.footer-icons i {
+  color: #4cc0e7;
+}
+
 #racesAccordion {
   max-width: 800px;
+  border: none !important;
 }
 
 .accordion-button {
@@ -26,8 +35,26 @@ body {
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
 }
 
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(1, 172, 240, 0.25) !important;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
 .race-date {
   font-weight: 300;
+}
+
+i.more-info {
+  color: #4cc0e7;
+}
+
+i.more-info:hover,
+i.footer-icon:hover {
+  color: #f8f9fa;
 }
 
 /*# sourceMappingURL=style.css.map */
